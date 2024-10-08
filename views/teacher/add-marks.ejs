@@ -1,0 +1,44 @@
+<%- include('../partials/header', { title: 'Add/Update Marks', teacher }) %>
+
+<h2>Add/Update Marks for <%= student.name %> (Roll No: <%= student.rollNo %>)</h2>
+
+<form action="/teacher/add-marks/<%= student.id %>" method="POST">
+  <table>
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Internal Marks</th>
+        <th>External Marks</th>
+        <th>Practical Marks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (student.StudentSubjectMarks.length === 0) { %>
+        <tr>
+          <td colspan="4">No subjects assigned to this student.</td>
+        </tr>
+      <% } else { %>
+        <% student.StudentSubjectMarks.forEach(mark => { %>
+          <tr>
+            <td><%= mark.Subject.name %></td>
+            <td>
+              <input type="number" name="marksInternal_<%= mark.Subject.id %>" value="<%= mark.marksInternal !== null ? mark.marksInternal : '' %>" min="0" max="25" required>
+            </td>
+            <td>
+              <input type="number" name="marksExternal_<%= mark.Subject.id %>" value="<%= mark.marksExternal !== null ? mark.marksExternal : '' %>" min="0" max="75" required>
+            </td>
+            <td>
+              <input type="number" name="marksPractical_<%= mark.Subject.id %>" value="<%= mark.marksPractical !== null ? mark.marksPractical : '' %>" min="0" max="50" required>
+            </td>
+            <!-- Hidden input to carry subjectId -->
+            <input type="hidden" name="subjectId_<%= mark.Subject.id %>" value="<%= mark.Subject.id %>">
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+
+  <button type="submit">Save Marks</button>
+</form>
+
+<%- include('../partials/footer') %>

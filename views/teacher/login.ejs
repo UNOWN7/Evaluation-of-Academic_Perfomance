@@ -1,0 +1,21 @@
+<%- include('../partials/header', { title: 'Teacher Login', teacher: null }) %>
+<header>
+<h2>Teacher Login</h2>
+</header>
+<% if (message) { %>
+  <div class="error"><%= message %></div>
+<% } %>
+
+<form action="/teacher/login" method="POST">
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email" required>
+
+  <label for="password">Password:</label>
+  <input type="password" name="password" id="password" required>
+
+  <button type="submit">Login</button>
+</form>
+<form action="/student/login" method="GET">
+  <button type="submit">Go to Student Login</button>
+</form>
+<%- include('../partials/footer') %>

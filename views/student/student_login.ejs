@@ -1,0 +1,12 @@
+<%- include('../partials/header', { title: 'Student Login' }) %>
+<header>
+<h2>Student Login</h2></header>
+<form action="/student/login" method="POST">
+  <label for="rollNo">Enter Seat Number:</label>
+  <input type="text" name="rollNo" required>
+  <button type="submit">Login</button>
+</form>
+<form action="/teacher/login" method="GET">
+  <button type="submit">Go to Teacher Login</button>
+</form>
+<%- include('../partials/footer') %>

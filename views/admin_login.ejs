@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/login.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Admin Login</title>
+</head>
+<body>
+  <div class="form">
+    <div class="form-panel one">
+      <div class="form-header">
+        <h1>Admin Login</h1>
+      </div>
+      <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+      <% } %>
+      <form action="/admin/login" method="POST">
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" name="password" required>
+            </div>
+            <div class="form-group">
+              <button type="submit">Login</button>
+            </div>
+      </form>
+      <div class="form-footer">
+        <form action="/teacher/login" method="GET" class="footer-form">
+          <button type="submit">Go to Teacher Login</button>
+        </form>
+        <form action="/student/login" method="GET" class="footer-form">
+          <button type="submit">Go to Student Login</button>
+        </form>
+      </div>
+    </div>
+    <div class="form-toggle"></div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      var panelOne = $('.form-panel.one').height(),
+          panelTwo = $('.form-panel.two')[0].scrollHeight;
+
+      $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
+        e.preventDefault();
+
+        $('.form-toggle').addClass('visible');
+        $('.form-panel.one').addClass('hidden');
+        $('.form-panel.two').addClass('active');
+        $('.form').animate({
+          'height': panelTwo
+        }, 200);
+      });
+
+      $('.form-toggle').on('click', function(e) {
+        e.preventDefault();
+        $(this).removeClass('visible');
+        $('.form-panel.one').removeClass('hidden');
+        $('.form-panel.two').removeClass('active');
+        $('.form').animate({
+          'height': panelOne
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>

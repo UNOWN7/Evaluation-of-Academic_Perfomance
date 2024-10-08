@@ -1,0 +1,81 @@
+<%- include('../partials/header', { title: 'Teacher Dashboard', teacher }) %>
+<header>
+    <h1>Teacher Portal</h1>
+    <% if (teacher) { %>
+      <nav>
+        <a href="/teacher/dashboard">Dashboard</a>
+        <a href="/teacher/logout">Logout</a>
+      </nav>
+    <% } %>
+  </header>
+<h2>Welcome, <%= teacher.name %></h2>
+
+<h3>Your Classes</h3>
+
+<% if (classes.length === 0) { %>
+  <p>You have no classes assigned.</p>
+<% } else { %>
+  <form id="classSelectionForm">
+    <label for="classDropdown">Select a Class:</label>
+    <select id="classDropdown" onchange="filterStudentsByClass(this.value)">
+      <option value="">-- Select Class --</option>
+      <% classes.forEach(cls => { %>
+        <option value="<%= cls.id %>"><%= cls.name %> (<%= cls.Course ? cls.Course.name : 'No Course Assigned' %>)</option>
+      <% }) %>
+    </select>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Class Name</th>
+        <th>Course</th>
+        <th>Student Name</th>
+        <th> Seat No</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="classTableBody">
+      <% classes.forEach(cls => { %>
+        <% if (cls.Students.length === 0) { %>
+          <tr class="classRow" data-class-id="<%= cls.id %>">
+            <td><%= cls.name %></td>
+            <td><%= cls.Course ? cls.Course.name : 'No Course Assigned' %></td>
+            <td colspan="3">No students enrolled.</td>
+          </tr>
+        <% } else { %>
+          <% cls.Students.forEach(student => { %>
+            <tr class="classRow" data-class-id="<%= cls.id %>">
+              <td><%= cls.name %></td>
+              <td><%= cls.Course ? cls.Course.name : 'No Course Assigned' %></td>
+              <td><%= student.name %></td>
+              <td><%= student.rollNo %></td>
+              <td>
+                <button>
+                  <a href="/teacher/add-marks/<%= student.id %>">Add/Update Marks</a>
+                </button>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<script>
+  // JavaScript function to filter the table based on the selected class
+  function filterStudentsByClass(classId) {
+    const rows = document.querySelectorAll('.classRow');
+    
+    rows.forEach(row => {
+      if (classId === "" || row.getAttribute('data-class-id') === classId) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+<%- include('../partials/footer') %>

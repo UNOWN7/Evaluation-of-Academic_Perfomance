@@ -1,0 +1,40 @@
+<%- include('../partials/header', { title: 'Student Dashboard', student }) %>
+<header>
+   <h2> Student Dashboard</h2>
+</header>
+<h2>Welcome, <%= student.name %></h2>
+
+<h3>Your Marks</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Internal Marks</th>
+      <th>External Marks</th>
+      <th>Practical Marks</th>
+  
+    </tr>
+  </thead>
+  <tbody>
+    <% marks.forEach(mark => { %>
+      <tr>
+        <td><%= mark.Subject.name %></td>
+        <td><%= mark.marksInternal %></td>
+        <td><%= mark.marksExternal %></td>
+        <td><%= mark.marksPractical %></td>
+       
+        
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<% if (!failed) { %>
+  <h4>Total Marks: <%= totalMarks %></h4>
+  <h4>Total Percentage: <%= percentage.toFixed(2) %>%</h4>
+<% } else { %>
+  <p>You have failed in one or more subjects, so total marks and percentage are not shown.</p>
+<% } %>
+
+<%- include('../partials/footer') %>
