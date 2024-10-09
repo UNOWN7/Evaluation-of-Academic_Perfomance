@@ -73,7 +73,13 @@ db.sequelize.sync({ alter: true }) // 'alter: true' adjusts tables to match mode
   });
 
 
-
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 
   const PORT = process.env.PORT || 3000;
