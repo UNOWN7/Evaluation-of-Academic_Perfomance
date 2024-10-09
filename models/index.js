@@ -20,14 +20,16 @@ if (config.use_env_variable) {
 // Function to safely import models
 const importModel = (modelName) => {
   try {
-    db[modelName] = require(`./${modelName}`)(sequelize, Sequelize.DataTypes);
+    const modelPath = path.join(__dirname, modelName); // Full path to model
+    db[modelName] = require(modelPath)(sequelize, Sequelize.DataTypes);
     console.log(`✅ Successfully imported model: ${modelName}`);
   } catch (error) {
     console.error(`❌ Failed to import model: ${modelName}`);
-    console.error(error);
+    console.error(`Error stack: ${error.stack}`); // Add stack trace to error
     db[modelName] = undefined;
   }
 };
+
 
 // List of model names as per your setup
 const modelNames = ['Course', 'Teacher', 'Class', 'Student', 'Subject', 'StudentSubjectMark', 'Admin'];
