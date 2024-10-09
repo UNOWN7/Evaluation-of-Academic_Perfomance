@@ -370,7 +370,8 @@
       newSubject.className = 'subject-fields';
       newSubject.innerHTML = `
         <button type="button" class="remove-subject" onclick="removeSubject(this)">Remove</button>
-       
+         <label for="subjectName">Subject Name:</label>
+        <input type="text" name="subjectName[]" required>
       `;
       subjectsContainer.appendChild(newSubject);
     }
