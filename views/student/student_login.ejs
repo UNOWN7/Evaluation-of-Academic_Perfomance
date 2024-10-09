@@ -1,12 +1,35 @@
 <%- include('../partials/header', { title: 'Student Login' }) %>
-<header>
-<h2>Student Login</h2></header>
-<form action="/student/login" method="POST">
-  <label for="rollNo">Enter Seat Number:</label>
-  <input type="text" name="rollNo" required>
-  <button type="submit">Login</button>
-</form>
-<form action="/teacher/login" method="GET">
-  <button type="submit">Go to Teacher Login</button>
-</form>
+
+<div class="form">
+  <!-- Top Right Button -->
+  <button class="button-top-right">Help</button>
+
+  <!-- Student Login Panel -->
+  <div class="form-panel active">
+    <div class="form-header">
+      <h1>Student Login</h1>
+    </div>
+
+    
+    <form action="/student/login" method="POST" class="form-group">
+      <label for="rollNo">Enter Seat Number:</label>
+      <input type="text" name="rollNo" id="rollNo" required>
+    
+      <div class="form-group">
+        <button type="submit">Login</button>
+      </div>
+    
+    </form>
+
+    <!-- Submit Button -->
+   
+
+    <!-- Navigation to Other Logins -->
+    <div class="form-footer">
+      <a href="/teacher/login" class="toggle-btn">Go to Teacher Login</a>
+      
+    </div>
+  </div>
+</div>
+
 <%- include('../partials/footer') %>

@@ -1,21 +1,43 @@
-<%- include('../partials/header', { title: 'Teacher Login', teacher: null }) %>
-<header>
-<h2>Teacher Login</h2>
-</header>
-<% if (message) { %>
-  <div class="error"><%= message %></div>
-<% } %>
+<%- include('../partials/header', { title: 'Teacher Login' }) %>
 
-<form action="/teacher/login" method="POST">
-  <label for="email">Email:</label>
-  <input type="email" name="email" id="email" required>
+<div class="form">
+  <!-- Top Right Button -->
+  <button class="button-top-right">Help</button>
 
-  <label for="password">Password:</label>
-  <input type="password" name="password" id="password" required>
+  <!-- Teacher Login Panel -->
+  <div class="form-panel active">
+    <div class="form-header">
+      <h1>Teacher Login</h1>
+    </div>
 
-  <button type="submit">Login</button>
-</form>
-<form action="/student/login" method="GET">
-  <button type="submit">Go to Student Login</button>
-</form>
+    <!-- Error Message (if any) -->
+    <% if (message) { %>
+      <p class="error-message"><%= message %></p>
+    <% } %>
+
+    <!-- Login Form -->
+    <form action="/teacher/login" method="POST" class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+    
+
+   
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required>
+    
+
+    <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+
+    <!-- Navigation to Other Logins -->
+    <div class="form-footer">
+      <a href="/student/login" class="toggle-btn">Go to Student Login</a>
+      
+    </div>
+  </div>
+</div>
+
 <%- include('../partials/footer') %>
